@@ -1,0 +1,178 @@
+/* ===============================
+   General Reset & Base Styling
+================================== */
+* {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    background-color: #f8f9fa;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===============================
+   Header
+================================== */
+header, .app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    z-index: 1050;
+    background-color: #ff0000;
+    border-bottom: 2px solid #000;
+    color: white;
+    padding: 0.5rem 1rem;
+}
+
+.app-header {
+    background-color: #198754;
+    border-bottom-width: 4px;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+header p {
+    font-size: 0.85rem;
+    font-weight: 300;
+}
+
+/* ===============================
+   Sidebar
+================================== */
+#sidebar {
+    width: 240px;
+    position: fixed;
+    top: 70px;
+    bottom: 0;
+    left: 0;
+    background-color: #167716;
+    overflow-y: hidden;
+    z-index: 1000;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+#sidebar.collapsed {
+    margin-left: -240px;
+}
+
+#sidebar .nav-link {
+    padding: 12px 20px;
+    color: #fff;
+    font-weight: 500;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#sidebar .nav-link:hover,
+#sidebar .nav-link.active {
+    background-color: #145c3a;
+}
+
+.user-info img {
+    border: 3px solid #fff;
+}
+
+.user-info h3 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* ===============================
+   Main Wrapper & Content Area
+================================== */
+#main-wrapper {
+    margin-left: 240px;
+    margin-top: 70px;
+    padding: 1rem;
+    height: calc(100vh - 70px);
+    overflow-y: auto;
+    display: flex;
+    position: relative;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+#main-wrapper.collapsed {
+    margin-left: 0;
+}
+
+.main-content-area {
+    flex-grow: 1;
+}
+
+/* ===============================
+   Forms & Tables
+================================== */
+form select {
+    min-width: 150px;
+}
+
+#main-content {
+    border-radius: 1px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+/* ===============================
+   Dropdown & Logout
+================================== */
+.dropdown-menu a {
+    transition: all 0.2s ease;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f1f1f1;
+}
+
+/* ===============================
+   Responsive (Mobile)
+================================== */
+@media (max-width: 768px) {
+    #sidebar {
+        height: calc(100% - 70px);
+    }
+
+    #sidebar .nav-link {
+        font-size: 1rem;
+        padding: 0;
+    }
+
+    #sidebar.collapsed {
+        margin-left: -240px;
+    }
+
+    #main-wrapper,
+    #main-wrapper.collapsed {
+        margin-left: 0 !important;
+    }
+
+    .sidebar-overlay {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        height: calc(100% - 70px);
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1500;
+        display: none;
+    }
+
+    .sidebar-overlay.active {
+        display: block;
+    }
+}
+
+/* ===============================
+   Sidebar Toggle (Optional)
+================================== */
+#sidebarToggle {
+    font-size: 1.2rem;
+}

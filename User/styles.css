@@ -1,0 +1,141 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #87CEEB;
+}
+
+.dashboard-container {
+    display: flex;
+}
+
+img {
+    width: 100%;
+    margin-bottom: 1rem;
+    align-self: center;
+    border-radius: 50%;
+}
+
+.sidebar {
+    width: 250px;
+    background: #F4D03F;
+    padding: 20px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    min-height: 100vh;
+    height: 100%;
+    align-items: center;
+    overflow-y: hidden;
+    transition: width 0.3s ease; /* Smooth transition */
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px;
+    transition: background 0.3s, padding-left 0.3s;
+}
+
+.sidebar ul li:hover {
+    background: #F1C40F; /* Darker shade on hover */
+    padding-left: 15px; /* Indent effect */
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    font-weight: bold;
+}
+
+#logout-link {
+    bottom: 0;
+}
+
+.main-content {
+    flex: 1;
+    background-color: #87CEEB;
+    padding: 10px;
+    opacity: 90%;
+}
+
+h3 #greetings {
+    font-size: 2rem;
+}
+
+
+.container {
+    width: 100%;
+    max-height: 95vh;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+/* Table Styling */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table thead {
+    background: #3498db;
+    color: white;
+}
+
+.table th, .table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.table tbody tr:hover {
+    background: #f1f1f1;
+}
+
+/* Status Badges */
+.badge {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+.bg-success {
+    background: #28a745;
+    color: white;
+}
+
+.bg-warning {
+    background: #ffc107;
+    color: black;
+}
+
+.bg-danger {
+    background: #dc3545;
+    color: white;
+}
+
+/* Buttons */
+.btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.btn-danger {
+    background: #e74c3c;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #c0392b;
+}
+
+.btn-secondary {
+    background: #95a5a6;
+    color: white;
+    cursor: not-allowed;
+}

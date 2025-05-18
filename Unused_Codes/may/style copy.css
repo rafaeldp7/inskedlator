@@ -1,0 +1,249 @@
+
+:root {
+    --primary: #198754;
+    --dark: #145c3a;
+    --accent: #1ABC9C;
+    --light-bg: #f4f6f9;
+    --white: #fff;
+    --text: #333;
+    --border: #ddd;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--light-bg);
+    color: var(--text);
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: var(--primary);
+    color: var(--white);
+    padding: 0 1rem;
+    z-index: 1000;
+    border-bottom: 2px solid var(--dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header h1 {
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+header p {
+    font-size: 0.9rem;
+    margin: 0;
+    opacity: 0.85;
+}
+
+header .btn-outline-light {
+    border-color: var(--white);
+    color: var(--white);
+}
+
+header .dropdown-toggle {
+    color: var(--white);
+}
+
+#main-wrapper {
+    margin-top: 80px;
+    display: flex;
+    min-height: calc(100vh - 80px);
+}
+/* SIDEBAR LINKS */
+#sidebar .nav-link {
+    display: block;
+    color: var(--white) !important;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.2s;
+    text-decoration: none;
+}
+
+#sidebar .nav-link:hover,
+#sidebar .nav-link.active {
+    background: var(--dark);
+    color: var(--white) !important;
+    transform: scale(1.03);
+}
+
+/* Sidebar collapsed state */
+.sidebar-collapsed #sidebar {
+    display: none;
+}
+
+.sidebar-collapsed #right {
+    width: 100%;
+    margin-left: 0;
+}
+
+/* RIGHT CONTENT */
+#right {
+    flex-grow: 1;
+    padding: 2rem;
+    background: var(--white);
+    overflow-y: auto;
+    transition: all 0.3s ease;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+#filter {
+    width: 200px;
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+}
+
+/* TABLE STYLES */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+th,
+td {
+    padding: 0.75rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+}
+
+th {
+    background: var(--accent);
+    color: var(--white);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+tr:nth-child(even) {
+    background: #fafafa;
+}
+
+tr:hover {
+    background: #e8f7f1;
+}
+
+/* BUTTONS */
+button.approve-btn,
+button.reject-btn,
+button.delete-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+button.approve-btn {
+    background: #28A745;
+    color: var(--white);
+}
+
+button.approve-btn:hover {
+    background: #218838;
+    transform: scale(1.05);
+}
+
+button.reject-btn {
+    background: #E67E22;
+    color: var(--white);
+}
+
+button.reject-btn:hover {
+    background: #D35400;
+    transform: scale(1.05);
+}
+
+button.delete-btn {
+    background: #E74C3C;
+    color: var(--white);
+}
+
+button.delete-btn:hover {
+    background: #C0392B;
+    transform: scale(1.05);
+}
+
+@media (max-width: 992px) {
+    #main-wrapper {
+        flex-direction: column;
+    }
+
+    #sidebar {
+        width: 100%;
+        background: var(--primary);
+    }
+
+    #sidebar .nav-link {
+        padding: 1rem;
+        text-align: center;
+    }
+
+    #right {
+        padding: 1rem;
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    #filter {
+        width: 100%;
+    }
+
+    table {
+        font-size: 0.85rem;
+    }
+
+    th, td {
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding: 0.5rem 1rem;
+    }
+
+    header h1 {
+        font-size: 1rem;
+    }
+
+    header p {
+        font-size: 0.8rem;
+    }
+
+    button.approve-btn,
+    button.reject-btn,
+    button.delete-btn {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.75rem;
+    }
+}
