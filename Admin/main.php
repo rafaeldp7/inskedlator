@@ -21,13 +21,25 @@ $model = new ScheduleModel($conn);
 // Handle form submissions
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['schedule_id'])) {
     $schedule_id = (int) $_POST['schedule_id'];
-    if (isset($_POST['approve'])) {
-        $model->updateScheduleStatus($schedule_id, 'Approved');
-    } elseif (isset($_POST['reject'])) {
-        $model->updateScheduleStatus($schedule_id, 'Rejected');
-    } elseif (isset($_POST['delete'])) {
-        $model->deleteSchedule($schedule_id);
-    }
+    // Modify the approval/rejection handlers (around line 24):
+if (isset($_POST['approve'])) {
+    $model->updateScheduleStatus($schedule_id, 'Approved');
+    // Get schedule details
+    $schedule = $conn->query("SELECT user_id, day, shift FROM schedules WHERE id = $schedule_id")->fetch_assoc();
+    createNotification(
+        $schedule['user_id'],
+        "Schedule Approved",
+        "Your " . htmlspecialchars($schedule['shift']) . " shift on " . htmlspecialchars($schedule['day']) . " was approved"
+    );
+} elseif (isset($_POST['reject'])) {
+    $model->updateScheduleStatus($schedule_id, 'Rejected');
+    $schedule = $conn->query("SELECT user_id, day, shift FROM schedules WHERE id = $schedule_id")->fetch_assoc();
+    createNotification(
+        $schedule['user_id'],
+        "Schedule Rejected",
+        "Your " . htmlspecialchars($schedule['shift']) . " shift on " . htmlspecialchars($schedule['day']) . " was rejected"
+    );
+}
 
     $redirectParams = array_filter([
         'sort_by' => $_GET['sort_by'] ?? null,

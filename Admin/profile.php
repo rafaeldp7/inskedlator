@@ -1,6 +1,6 @@
 <?php
 
-include('../config.php'); // Include your database connection
+require_once('../config.php'); // Include your database connection
 
 // Check if the admin is logged in
 if (!isset($_SESSION['admin_id'])) {

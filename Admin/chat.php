@@ -177,11 +177,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         let lastMessageId = 0;
         let receiver_id = null;
         let lastDateLabel = null;
+        let isSending = false; // Flag to prevent multiple sends
 
+        // Input and key handlers
         $('#message').on('input', function () {
             $('#send-btn').prop('disabled', $(this).val().trim() === '');
+        }).on('keypress', function(e) {
+            if (e.which === 13 && !e.shiftKey) {
+                e.preventDefault();
+                if (!isSending) sendMessage();
+            }
         });
 
+        $('#send-btn').on('click', function() {
+            if (!isSending) sendMessage();
+        });
+
+        // User selection handler
         $(document).on('click', '.user-item', function () {
             $('.user-item').removeClass('selected');
             $(this).addClass('selected');
@@ -190,7 +202,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             lastDateLabel = null;
             $('#chat-box').empty().append("<div class='loading-indicator'>Loading...</div>");
 
-            // Mark messages from this user as seen
             $.post('./chat.php', {
                 action: 'markSeen',
                 sender_id: receiver_id
@@ -199,10 +210,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             loadMessages(true);
         });
 
-
         function sendMessage() {
             const message = $('#message').val().trim();
-            if (!receiver_id || message === '') return;
+            if (!receiver_id || message === '' || isSending) return;
+            
+            isSending = true;
+            $('#send-btn').prop('disabled', true);
             
             $.post('./chat.php', {
                 action: 'sendMessage',
@@ -210,15 +223,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 receiver_type: 'user',
                 message: message
             }, function (resp) {
+                isSending = false;
                 if (resp.status === 'success') {
-                    $('#message').val('');
-                    $('#send-btn').prop('disabled', true);
+                    $('#message').val('').focus();
                     loadMessages(true);
                 } else {
-                    alert('❌ Error: ' + resp.message);
+                    alert('❌ Error: ' + (resp.message || 'Unknown error'));
+                    $('#send-btn').prop('disabled', false);
                 }
             }, 'json').fail(function () {
+                isSending = false;
                 alert('❌ Failed to send message. Please try again.');
+                $('#send-btn').prop('disabled', false);
             });
         }
 

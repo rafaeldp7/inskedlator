@@ -40,8 +40,16 @@ if ($conn->connect_error) {
     die("Connection failed after creating database: " . $conn->connect_error);
 }
 
-?>
 
+// Add to config.php
+function createNotification($userId, $title, $message) {
+    global $conn;
+    $stmt = $conn->prepare("INSERT INTO notifications (user_id, title, message) VALUES (?, ?, ?)");
+    $stmt->bind_param("iss", $userId, $title, $message);
+    return $stmt->execute();
+}
+
+?>
 
 
 

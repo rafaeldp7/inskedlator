@@ -49,8 +49,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $conn->prepare("INSERT INTO announcements (title, content) VALUES (?, ?)");
             $stmt->bind_param("ss", $title, $content);
 
-            if ($stmt->execute()) {
+
+
+                if ($stmt->execute()) {
+    // Notify all users
+    $users = $conn->query("SELECT id FROM users WHERE receive_announcements = 1");
+    while ($user = $users->fetch_assoc()) {
+        createNotification(
+            $user['id'],
+            "New Announcement: " . htmlspecialchars($title),
+            substr(htmlspecialchars($content), 0, 100) . "..."
+        );
+    }
+
                 set_flash_message("Announcement added successfully!", "success");
+
             } else {
                 set_flash_message("Error adding announcement: " . $stmt->error, "danger");
             }

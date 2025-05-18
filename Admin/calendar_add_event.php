@@ -29,9 +29,21 @@ if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
 $stmt = $conn->prepare("INSERT INTO events (title, description, date) VALUES (?, ?, ?)");
 $stmt->bind_param("sss", $title, $desc, $date);
 
+    
+    // Add after successful event insertion (around line 24):
 if ($stmt->execute()) {
+    // Get all users who should receive this notification
+    $users = $conn->query("SELECT user_id FROM users WHERE receive_event_notifications = 1");
+    while ($user = $users->fetch_assoc()) {
+        createNotification(
+            $user['user_id'],
+            "New Event: " . htmlspecialchars($title),
+            "A new event '" . htmlspecialchars($title) . "' was scheduled for " . date('M j, Y', strtotime($date))
+        );
+    }
     echo 'Event added';
-} else {
+}
+else {
     http_response_code(500);
     echo 'Database error';
 }
