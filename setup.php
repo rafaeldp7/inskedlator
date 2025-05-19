@@ -106,7 +106,7 @@ function createTables($conn)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci",
         
         "system_user" => "INSERT IGNORE INTO users (lastname, firstname, middlename, birthday, userID, password)
-            VALUES ('System', 'Account', '', '1111-01-01', '25-0001', '" . password_hash('11111111', PASSWORD_BCRYPT) . "')",
+            VALUES ('System', 'Account', '', '1111-01-01', '25-0001', '" . password_hash('11122004', PASSWORD_BCRYPT) . "')",
             
         "migrations" => "CREATE TABLE IF NOT EXISTS migrations (
             version VARCHAR(20) PRIMARY KEY,
